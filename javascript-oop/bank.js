@@ -81,13 +81,14 @@ class Bank {
         if (!(customer.phoneNumber in this.accounts)) {
             let account = new Account(customer);
             this.accounts[customer.phoneNumber] = account;
-            return true;
+            return account;
         } else {
-            return false;
+            return null;
         }
     }
 
-    debitAccount(account, amount) {
+    debitAccount(account, amount) { 
+        if (account === null) return false; 
         if (account.balance >= amount) {
             account.balance -= amount;
             return true;
@@ -97,6 +98,7 @@ class Bank {
     }
 
     creditAccount(account, amount) {
+        if (account === null) return false;
         account.balance += amount;
         return true;
     }
@@ -109,6 +111,6 @@ class Bank {
 let bank = new Bank("Skye Bank", "123 Main St");
 bank.registerCustomer("Basirat", "Usman", "Main Street", "08166666");
 let customer = bank.customers["08166666"];
-let newAccountCreated = bank.createAccount(customer); 
-console.log(bank);
-
+let newAccountCreated = bank.createAccount(customer);
+bank.creditAccount(newAccountCreated, 1000); 
+console.log(bank.debitAccount(newAccountCreated, 100)); 
