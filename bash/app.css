@@ -19,6 +19,6 @@ body{
     font-size: 200%;
 }
 p .example-info{
-  color: hwb(240 43% 28%);
+  color: 240 43% 28%;
   text-decoration: none;
 }
